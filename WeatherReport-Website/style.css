@@ -1,0 +1,65 @@
+body{
+    background-image: url("assets/weather-background.jpg");
+    background-size: cover;
+    margin: 0; 
+    height: 100vh; 
+    display: grid; 
+    place-items: center; 
+}
+
+
+.main{
+    width: 300px; 
+    height: 200px;
+    background-color: rgb(243, 233, 233); 
+    text-align: center; 
+    padding: 20px;
+    border-radius: 8px; 
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); 
+}
+.main label{
+    font-weight: bolder;
+
+}
+.main input{
+    margin-left: 0px;
+    border: none;
+    border-radius: 10px;
+    box-shadow: 2px 2px 4px rgb(194, 135, 135);
+}
+.main button{
+    margin-top: 8px;
+    border: none;
+    border-radius: 10px;
+    width: 40%;
+    font-weight: bolder;
+    box-shadow: 2px 2px 4px rgb(194, 135, 135);
+}
+
+.main button:hover{
+    background-color: lightcoral;
+    color: #fff;
+}
+.main p{
+    margin-top: 20px;
+    font-weight: bolder;
+}
+
+#suggestions {
+    margin-top: 10px;
+    border: 1px solid #ccc;
+    max-height: 200px;
+    overflow-y: auto;
+    list-style-type: none;
+    padding: 0;
+    width: 270px;
+}
+#suggestions li {
+    padding: 8px;
+    cursor: pointer;
+    background-color: #e48a8a;
+}
+#suggestions li:hover {
+    background-color: #dd5f5f;
+    
+}
