@@ -3,33 +3,6 @@ body{
     background-size: cover;
     height: 100vh; 
 }
-
-@keyframes fadeInSlideUp {
-    0% {
-        opacity: 0;
-        transform: translateY(20px);
-    }
-    100% {
-        opacity: 1;
-        transform: translateY(0);
-    }
-}
-
-/* Applying animation to a heading */
-.animated-heading {
-    margin-top: 10px;
-    font-size: 2rem;
-    color: #000000;
-    animation: fadeInSlideUp 1.5s ease-in-out forwards; /* Animation name, duration, easing, and fill mode */
-}
-
-/* Applying animation to a paragraph */
-.animated-paragraph {
-    font-size: 1rem;
-    color: #302929;
-    animation: fadeInSlideUp 2s ease-in-out forwards;
-    animation-delay: 0.5s; /* Delay before the animation starts */
-}
 .container{
     display: grid;
     place-items: center;
