@@ -1,19 +1,11 @@
-
-function locationName()
-{
-    const loc_name = document.getElementById("name").value;
-
-    console.log(loc_name);
-}
-
-const apiKey = '1cb0618925msh271f76c1a13f805p119986jsnb7900a92f560';// Replace with your actual GeoDB API key
+const apiKey = '1cb0618925msh271f76c1a13f805p119986jsnb7900a92f560'; // Replace with your actual GeoDB API key
 const weatherApiKey = 'eabdf564f0fc54f9336b850f97dfe725'; // Replace with your actual Weather API key
 
 let debounceTimer;
 
 async function fetchCities() {
     const query = document.getElementById('cityInput').value;
-    const limit = 2; // Limit the number of suggestions
+    const limit = 5; // Limit the number of suggestions
     const apiUrl = `https://wft-geo-db.p.rapidapi.com/v1/geo/cities?namePrefix=${query}&limit=${limit}`;
 
     if (query.length === 0) { 
@@ -54,16 +46,22 @@ function displayCities(cities) {
         listItem.onclick = () => {
             document.getElementById('cityInput').value = city.name;
             suggestionsList.innerHTML = ''; // Clear suggestions on selection
+            fetchWeatherForInput(); // Fetch weather for the selected city
         };
         suggestionsList.appendChild(listItem);
     });
 }
 
-// Show suggestions when input field is clicked
-document.addEventListener('DOMContentLoaded', function () {
-    document.getElementById('cityInput').addEventListener('click', fetchCities);
-});
+// Debounce function to limit API calls
+function debounce(func, delay) {
+    clearTimeout(debounceTimer);
+    debounceTimer = setTimeout(func, delay);
+}
 
+// Attach event listeners after DOM content is loaded
+document.addEventListener('DOMContentLoaded', function () {
+    document.getElementById('cityInput').addEventListener('input', () => debounce(fetchCities, 300)); // Add debouncing to input event
+});
 
 async function fetchWeatherForInput() {
     const cityName = document.getElementById('cityInput').value;
@@ -73,8 +71,8 @@ async function fetchWeatherForInput() {
         return;
     }
 
-    // Use a different API to get city coordinates based on the city name
-    const apiUrl = `https://wft-geo-db.p.rapidapi.com/v1/geo/cities?name=${cityName}`;
+    // Use GeoDB API to get city details (latitude and longitude)
+    const apiUrl = `https://wft-geo-db.p.rapidapi.com/v1/geo/cities?namePrefix=${cityName}&limit=1`; // Limit to 1 to get the closest match
 
     try {
         const response = await fetch(apiUrl, {
@@ -110,6 +108,7 @@ async function fetchWeatherForInput() {
         const weatherData = await weatherResponse.json();
         const temperature = weatherData.main.temp;
         document.getElementById('weather-detail').textContent = `Temperature: ${temperature}°C`;
+        console.log(weatherData);
     } catch (error) {
         console.error('Error fetching weather:', error);
         document.getElementById('weather-detail').textContent = 'Error fetching weather details.';
