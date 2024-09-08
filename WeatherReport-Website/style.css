@@ -39,6 +39,7 @@ body{
 .main{
     width: 300px; 
     height: 200px;
+    position: relative;
     background-color: rgb(243, 233, 233); 
     text-align: center; 
     padding: 20px;
@@ -56,7 +57,7 @@ body{
     box-shadow: 2px 2px 4px rgb(194, 135, 135);
 }
 .main button{
-    margin-top: 8px;
+    margin-top: 28px;
     border: none;
     border-radius: 10px;
     width: 40%;
@@ -73,21 +74,58 @@ body{
     font-weight: bolder;
 }
 
-#suggestions {
-    margin-top: 10px;
-    border: 1px solid #ccc;
-    max-height: 200px;
-    overflow-y: auto;
-    list-style-type: none;
-    padding: 0;
-    width: 270px;
+
+/* CSS for animations */
+@keyframes fadeInSlideUp {
+    0% {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    100% {
+        opacity: 1;
+        transform: translateY(0);
+    }
 }
-#suggestions li {
+
+.animated-heading {
+    font-size: 2rem;
+    color: #333;
+    text-align: center;
+    animation: fadeInSlideUp 1.5s ease-in-out forwards;
+}
+
+.animated-paragraph {
+    font-size: 1rem;
+    color: #555;
+    text-align: center;
+    animation: fadeInSlideUp 2s ease-in-out forwards;
+    animation-delay: 0.5s;
+}
+
+
+/* Styling for the suggestions list */
+.suggestions-list {
+    position: absolute;
+    top: 30%; /* Position directly below the input field */
+    left: 10%;
+    width: 80%; /* Match the width of the input field */
+    max-height: 150px; /* Limit the height of the suggestions list */
+    overflow-y: auto; /* Add scrollbar if the suggestions exceed max height */
+    background-color: white;
+    border: 1px solid #ccc;
+    border-top: none;
+    z-index: 1000;
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.suggestions-list li {
     padding: 8px;
     cursor: pointer;
-    background-color: #e48a8a;
-}
-#suggestions li:hover {
-    background-color: #dd5f5f;
     
+}
+
+.suggestions-list li:hover {
+    background-color: #f0f0f0;
 }
